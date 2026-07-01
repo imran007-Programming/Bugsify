@@ -1,0 +1,15 @@
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String?  @unique
+  phone        String?  @unique
+  password     String
+  role         Role     @default(USER)
+  isBlocked    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  reportedBugs Bug[]    @relation("RepoterBugs")
+  assignedBugs Bug[]    @relation("AssignedBugs")
+
+  comments Comment[]
+}

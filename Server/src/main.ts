@@ -1,0 +1,21 @@
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
+import { SeedService } from 'prisma/admin_seed/admin-seed';
+import cookieParser from 'cookie-parser';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.use(cookieParser())
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      forbidNonWhitelisted: true,
+    })
+  )
+  const seedService = app.get(SeedService);
+  await seedService.seedAdmin();
+  await app.listen(process.env.PORT ?? 5000);
+}
+bootstrap();

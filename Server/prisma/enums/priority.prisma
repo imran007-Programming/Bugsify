@@ -1,0 +1,6 @@
+enum Priority {
+  LOW
+  MEDUIM
+  HIGH
+  CRITICAL
+}

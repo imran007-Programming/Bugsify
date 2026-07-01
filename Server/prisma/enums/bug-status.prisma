@@ -1,0 +1,6 @@
+enum Bug_status {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}

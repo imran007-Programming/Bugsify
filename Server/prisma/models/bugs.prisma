@@ -1,0 +1,14 @@
+model Bug {
+  id           String     @id @default(uuid())
+  title        String
+  description  String
+  status       Bug_status @default(OPEN)
+  priority     Priority   @default(MEDUIM)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  reporterId   String
+  reporter     User       @relation("RepoterBugs", fields: [reporterId], references: [id])
+  assignedToId String?
+  assignedTo   User?      @relation("AssignedBugs", fields: [assignedToId], references: [id])
+  comments     Comment[]
+}
